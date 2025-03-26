@@ -1,0 +1,30 @@
+<div class="container">
+  <h1>{{ title }}</h1>
+  <form (ngSubmit)="onSubmit()" #userForm="ngForm">
+    <div>
+      <label for="nombre">Nombre:</label>
+      <input type="text" id="nombre" [(ngModel)]="usuario.nombre" name="nombre" required>
+    </div>
+    <div>
+      <label for="email">Email:</label>
+      <input type="email" id="email" [(ngModel)]="usuario.email" name="email" required>
+    </div>
+    <div>
+      <label for="edad">Edad:</label>
+      <input type="number" id="edad" [(ngModel)]="usuario.edad" name="edad" required>
+    </div>
+    <button type="submit" [disabled]="!userForm.valid">Agregar usuario</button>
+  </form>
+  <div *ngIf="usuarios.length > 0">
+    <h2>Usuarios:</h2>
+    <ul>
+      <li *ngFor="let u of usuarios; let i = index">
+        {{ u.nombre }} - {{ u.email }} - {{ u.edad }}
+        <button (click)="removeUser(i)">Eliminar</button>
+      </li>
+    </ul>
+  </div>
+  <div *ngIf="usuarios.length === 0">
+    <p>No hay usuarios registrados.</p>
+  </div>
+</div>
